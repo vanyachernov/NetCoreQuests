@@ -8,7 +8,6 @@
 
     <ItemGroup>
       <Folder Include="ResultDirectory\" />
-      <Folder Include="Shared\ValueObjects\" />
     </ItemGroup>
 
     <ItemGroup>
