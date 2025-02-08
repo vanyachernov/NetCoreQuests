@@ -1,3 +1,4 @@
+using CSharpFunctionalExtensions;
 using Quests.Domain.Shared.IDs;
 using Quests.Domain.TestDirectory.Entities;
 using Quests.Domain.TestDirectory.ValueObjects;
@@ -36,8 +37,20 @@ public class Test : Shared.Entity<TestId>
     
     public void AddQuestion(Question question) => _questions.Add(question);
 
-    public void Validate()
+    public static Result<Test> Create(
+        TestId id,
+        Title title,
+        Description description,
+        UserId userId,
+        CreatedOrUpdatedAt createdAt,
+        CreatedOrUpdatedAt updatedAt)
     {
-        // so far
+        return new Test(
+            id,
+            title,
+            description,
+            userId,
+            createdAt,
+            updatedAt);
     }
 }
