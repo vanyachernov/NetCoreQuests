@@ -1,18 +1,47 @@
+import { useRef, useEffect } from "react"
 import { Link } from "react-router-dom"
 import logo from '../../../assets/img/logo/logo.png'
 import './Header.scss'
 
 export default function Header ({questsRef}) {
 
+    const headerRef = useRef(null)
     const navItems = ["Quests"]
 
     const handleOnClickNavItem = () => {
-        questsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })
+        if (questsRef.current) {
+            const headerHeight = headerRef.current?.offsetHeight || 0;
+            window.scrollTo({
+                top: questsRef.current.offsetTop - headerHeight,
+                behavior: "smooth",
+            })
+        }
     }
+
+    const handleOnClickLogo = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        })
+    }
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 50) {
+                headerRef.current?.classList.add("scrolled")
+            } else {
+                headerRef.current?.classList.remove("scrolled")
+            }
+        } 
+        window.addEventListener("scroll", handleScroll)
+        return () => {
+            window.removeEventListener("scroll", handleScroll)
+        }
+    },[])
 
     return (
         <>
-            <header className="header">
+            <header ref={headerRef} className="header">
                 <div className="container">
                     <div className="header_row">
                         <nav className="nav">
@@ -26,7 +55,7 @@ export default function Header ({questsRef}) {
                                 }
                             </ul>
                         </nav>
-                        <div className="logo">
+                        <div onClick={handleOnClickLogo} className="logo">
                             <img src={logo} alt="logo" className="logo__img"/>
                         </div>
                         <div className="header-buttons">
