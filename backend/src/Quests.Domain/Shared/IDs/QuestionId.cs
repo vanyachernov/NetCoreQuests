@@ -7,7 +7,7 @@ public record QuestionId
 {
     private QuestionId(Guid value) => Value = value;
     
-    private Guid Value { get; }
+    public Guid Value { get; }
     
     public static QuestionId NewId => new(Guid.NewGuid());
 
