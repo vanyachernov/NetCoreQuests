@@ -2,7 +2,7 @@ namespace Quests.Domain.Shared.IDs;
 
 public record TestId
 {
-    private Guid Value { get; }
+    public Guid Value { get; }
     
     private TestId(Guid value) => Value = value;
     

@@ -4,7 +4,7 @@ public record TestResultId
 {
     private TestResultId(Guid value) => Value = value;
     
-    private Guid Value { get; }
+    public Guid Value { get; }
     
     public static TestResultId NewId => new(Guid.NewGuid());
 
