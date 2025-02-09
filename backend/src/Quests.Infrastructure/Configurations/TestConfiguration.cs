@@ -19,6 +19,12 @@ public class TestConfiguration : IEntityTypeConfiguration<Test>
                 id => id.Value, 
                 value => TestId.Create(value));
         
+        builder
+            .Property(t => t.UserId)
+            .HasConversion(
+                id => id.Value, 
+                value => UserId.Create(value));
+        
         builder.OwnsOne(t => t.Title, title =>
         {
             title

@@ -9,6 +9,9 @@ public class Question : Shared.Entity<QuestionId>
 {
     private readonly List<Option> _options = [];
 
+    public Question(QuestionId id)
+        : base(id) { }
+
     public Question(
         QuestionId id,
         Text text,
@@ -16,9 +19,8 @@ public class Question : Shared.Entity<QuestionId>
         : base(id)
     {
         Text = text;
-        CorrectOption = correctOption;
         
-        _options.Add(correctOption);
+        SetCorrectOption(correctOption);
     }
 
     public Text Text { get; private set; } = default!;
@@ -35,7 +37,7 @@ public class Question : Shared.Entity<QuestionId>
         _options.Add(option);
     }
 
-    public void SetCorrectOption(Option option)
+    private void SetCorrectOption(Option option)
     {
         if (!_options.Contains(option))
         {
