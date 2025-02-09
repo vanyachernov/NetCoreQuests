@@ -48,6 +48,13 @@ public class TestConfiguration : IEntityTypeConfiguration<Test>
                 .IsRequired();
         });
         
+        builder.OwnsOne(t => t.Rating, rating =>
+        {
+            rating.Property(r => r.Value)
+                .HasColumnName("rating")
+                .IsRequired();
+        });
+        
         builder.OwnsOne(t => t.CreatedAt, createdAt =>
         {
             createdAt
