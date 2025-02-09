@@ -1,4 +1,5 @@
 using CSharpFunctionalExtensions;
+using Quests.Domain.Shared;
 
 namespace Quests.Domain.TestDirectory.ValueObjects;
 
@@ -16,11 +17,11 @@ public record Rating
 
     public double Value { get; }
 
-    public static Result<Rating> Create(double rating)
+    public static Result<Rating, Error> Create(double rating)
     {
         if (rating < 0 || rating > 5)
         {
-            return Result.Failure<Rating>("Rating must be between 0 and 5.");
+            return Errors.General.ValueIsInvalid("Rating must be between 0 and 5.");
         }
 
         return new Rating(rating);

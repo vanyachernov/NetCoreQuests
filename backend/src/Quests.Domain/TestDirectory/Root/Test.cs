@@ -1,4 +1,5 @@
 using CSharpFunctionalExtensions;
+using Quests.Domain.Shared;
 using Quests.Domain.Shared.IDs;
 using Quests.Domain.TestDirectory.Entities;
 using Quests.Domain.TestDirectory.ValueObjects;
@@ -41,9 +42,10 @@ public class Test : Shared.Entity<TestId>
     
     public IReadOnlyCollection<Question> Questions => _questions;
     
-    public void AddQuestion(Question question) => _questions.Add(question);
+    public void AddQuestion(Question question) 
+        => _questions.Add(question);
 
-    public static Result<Test> Create(
+    public static Result<Test, Error> Create(
         TestId id,
         Title title,
         Description description,
