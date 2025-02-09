@@ -17,12 +17,16 @@ public class Test : Shared.Entity<TestId>
         Title title,
         Description description,
         UserId userId,
+        Difficulty difficulty,
+        Rating rating,
         CreatedOrUpdatedAt createdAt,
         CreatedOrUpdatedAt updatedAt) : base(id)
     {
         Title = title;
         Description = description;
         UserId = userId;
+        Difficulty = difficulty;
+        Rating = rating;
         CreatedAt = createdAt;
         UpdatedAt = updatedAt;
     }
@@ -30,6 +34,8 @@ public class Test : Shared.Entity<TestId>
     public Title Title { get; private set; } = default!;
     public Description Description { get; private set; } = default!;
     public UserId UserId { get; private set; } = default!;
+    public Difficulty Difficulty { get; private set; } = default!;
+    public Rating Rating { get; private set; } = default!;
     public CreatedOrUpdatedAt CreatedAt { get; private set; } = default!;
     public CreatedOrUpdatedAt UpdatedAt { get; private set; } = default!;
     
@@ -42,6 +48,8 @@ public class Test : Shared.Entity<TestId>
         Title title,
         Description description,
         UserId userId,
+        Difficulty difficulty,
+        Rating rating,
         CreatedOrUpdatedAt createdAt,
         CreatedOrUpdatedAt updatedAt)
     {
@@ -50,6 +58,8 @@ public class Test : Shared.Entity<TestId>
             title,
             description,
             userId,
+            difficulty,
+            rating,
             createdAt,
             updatedAt);
     }
