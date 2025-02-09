@@ -1,3 +1,6 @@
+using System.Collections;
+using System.Collections.Immutable;
+
 namespace Quests.Domain.Shared.IDs;
 
 public record QuestionId
@@ -12,5 +15,5 @@ public record QuestionId
 
     public static QuestionId Create(Guid id) => new(id);
 
-    public static implicit operator Guid(QuestionId id) => id.Value; 
+    public static implicit operator Guid(QuestionId id) => id.Value;
 }
