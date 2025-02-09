@@ -9,7 +9,7 @@ public record Difficulty
 
     public Difficulties Value { get; }
 
-    public static Result<Difficulty> Create(Difficulties difficulty)
+    public static Result<Difficulty, Error> Create(Difficulties difficulty)
     {
         return new Difficulty(difficulty);
     }

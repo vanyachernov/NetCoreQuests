@@ -1,4 +1,5 @@
 using CSharpFunctionalExtensions;
+using Quests.Domain.Shared;
 
 namespace Quests.Domain.TestDirectory.ValueObjects;
 
@@ -15,11 +16,11 @@ public class CorrectOption
     public Guid Id { get; }
     public string Text { get; }
 
-    public static Result<CorrectOption> Create(string text)
+    public static Result<CorrectOption, Error> Create(string text)
     {
         if (string.IsNullOrWhiteSpace(text))
         {
-            return Result.Failure<CorrectOption>("Correct option text cannot be empty.");
+            return Errors.General.ValueIsInvalid("Correct option text cannot be empty.");
         }
         
         return new CorrectOption(

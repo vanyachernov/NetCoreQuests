@@ -9,12 +9,12 @@ public record Description
 
     public string Value { get; } = default!;
 
-    public static Result<Description> Create(string description)
+    public static Result<Description, Error> Create(string description)
     {
         if (string.IsNullOrWhiteSpace(description) || 
             description.Length > Constants.MAX_TITLE_DESCRIPTION_TEXT_LENGTH)
         {
-            return Result.Failure<Description>("Description is invalid!");
+            return Errors.General.ValueIsInvalid("Description is invalid!");
         }
 
         return new Description(description);

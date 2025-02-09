@@ -1,4 +1,5 @@
 using CSharpFunctionalExtensions;
+using Quests.Domain.Shared;
 
 namespace Quests.Domain.TestDirectory.ValueObjects;
 
@@ -8,11 +9,11 @@ public record Text
 
     public string Value { get; }
     
-    public static Result<Text> Create(string text)
+    public static Result<Text, Error> Create(string text)
     {
         if (string.IsNullOrWhiteSpace(text))
         {
-            return Result.Failure<Text>("Text cannot be empty.");
+            return Errors.General.ValueIsInvalid("Text cannot be empty.");
         }
 
         return new Text(text);

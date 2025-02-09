@@ -19,13 +19,13 @@ public record Option
     public string Text { get; }
     public bool IsCorrect { get; }
     
-    public static Result<Option> Create(
+    public static Result<Option, Error> Create(
         string text, 
         bool isCorrect)
     {
         if (string.IsNullOrWhiteSpace(text))
         {
-            return Result.Failure<Option>("Option text cannot be empty.");
+            return Errors.General.ValueIsInvalid("Option text cannot be empty.");
         }
         
         return new Option(
