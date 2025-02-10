@@ -80,9 +80,19 @@
 .section-two__quest-item-main{
     display: flex;
     column-gap: 10px;
-    align-items: center;
+    width: 100%;
     justify-content: space-between;
-    padding: 10px 13px;
+    padding: 5px 10px;
+    align-items: center;
+}
+
+.section-two__quest-item-title{
+    display: flex;
+    flex-direction: column;
+    row-gap: 3px;
+    width: 100%;
+    justify-content: center;
+    overflow: hidden;
 
     & h3 {
         font-size: 17px;
@@ -91,64 +101,31 @@
         max-width: 100%;
         overflow: hidden;
         text-overflow: ellipsis;
-        text-align: center;
-    }
-
-    & .section-two__quest-item-main__link{
-        padding: 7px 12px;
-        color: var(--text-color);
-        font-family: var(--font-main);
-        font-style: normal;
-        border-radius: 12px;
-        border: 2px solid var(--text-color);
-        background-color: transparent;
-        cursor: pointer;
-        transition: all 0.3s ease-in-out;
-
-        &:hover{
-            color: #000;
-            background-color: var(--text-color);
-            border-color: var(--text-color);
-            transform: scale(1);
-        }
     }
 }
 
-// .section-two-addNew{
-//     padding: 10px 0px;
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     row-gap: 15px;
-//     width: 100%;
+.section-two__quest-item-main__link{
+    padding: 7px 12px;
+    color: var(--text-color);
+    font-family: var(--font-main);
+    font-style: normal;
+    border-radius: 12px;
+    border: 2px solid var(--text-color);
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
 
-//     & h3{
-//         font-size: 30px;
-//         font-family: var(--font-accent);
-//         text-align: center;
-//     }
+    &:hover{
+        color: #000;
+        background-color: var(--text-color);
+        border-color: var(--text-color);
+        transform: scale(1);
+    }
+}
 
-//     & p{
-//         font-size: 17px;
-//     }
-
-//     & .section-two-addNew__link{
-//         padding: 10px 20px;
-//         color: var(--text-color);
-//         font-family: var(--font-main);
-//         font-size: 17px;
-//         font-style: normal;
-//         border-radius: 12px;
-//         border: 2px solid var(--text-color);
-//         background-color: transparent;
-//         cursor: pointer;
-//         transition: all 0.3s ease-in-out;
-
-//         &:hover{
-//             color: #000;
-//             background-color: var(--text-color);
-//             border-color: var(--text-color);
-//             transform: scale(1);
-//         }
-//     }
-// }
+.section-two__quest-item-title__rating{
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+}
