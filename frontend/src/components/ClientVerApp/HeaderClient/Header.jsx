@@ -59,7 +59,7 @@ export default function Header ({questsRef}) {
                             <img src={logo} alt="logo" className="logo__img"/>
                         </div>
                         <div className="header-buttons">
-                            <Link to={'/login'} className="header-buttons__button">
+                            <Link to={'/auth'} className="header-buttons__button">
                                 Login
                             </Link>
                         </div>

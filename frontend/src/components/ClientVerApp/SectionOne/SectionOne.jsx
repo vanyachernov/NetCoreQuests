@@ -25,7 +25,7 @@ export default function SectionOne () {
                         </p>
                     </div>
                     <div className="section-one-button">
-                        <Link to={'/login'} className="section-one-button__link">
+                        <Link to={'/auth'} className="section-one-button__link">
                             Login
                         </Link>
                     </div>

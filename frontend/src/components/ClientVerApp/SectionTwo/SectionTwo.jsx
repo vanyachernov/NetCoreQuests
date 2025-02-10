@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {useQuestsStore} from '../../../store/clientStore/questsStore/questsStore.js'
 import {BeatLoader} from 'react-spinners'
+import Rating from '@mui/material/Rating';
 import './SectionTwo.scss'
 
 const quests = [
@@ -10,24 +11,28 @@ const quests = [
         name: 'Lorem ipsum dolor sit amet',
         title: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo rerum incidunt, earum hic in neque dolorum, similique placeat sequi corporis consequuntur.',
         img: 'https://fakeimg.pl/800/',
+        rating: 3,
     },
     {
         id: 2,
         name: 'Lorem ipsum dolor sit amet',
         title: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo rerum incidunt, earum hic in neque dolorum, similique placeat sequi corporis consequuntur.',
         img: 'https://fakeimg.pl/600/',
+        rating: 2,
     },
     {
         id: 3,
         name: 'Lorem ipsum dolor sit amet',
         title: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo rerum incidunt, earum hic in neque dolorum, similique placeat sequi corporis consequuntur.',
         img: 'https://fakeimg.pl/600/',
+        rating: 4,
     },
     {
         id: 4,
         name: 'Lorem ipsum dolor sit amet',
         title: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo rerum incidunt, earum hic in neque dolorum, similique placeat sequi corporis consequuntur.',
         img: 'https://fakeimg.pl/600/',
+        rating: 3,
     },
 ]
 
@@ -61,17 +66,6 @@ export default function SectionTwo ({questsRef}) {
                             )
                         }
                     </div>
-                    {/* <div className="section-two-addNew">
-                        <h3 className="section-two-addNew__h3">
-                            Create Your Quest
-                        </h3>
-                        <p className="section-two-addNew__p">
-                            Sign in and start creating your quest!
-                        </p>
-                        <Link className="section-two-addNew__link" to={'/login'}>
-                            Login
-                        </Link>
-                    </div> */}
                 </div>
             </div>
         </>
@@ -86,9 +80,26 @@ function QuestItem ({quest}) {
                     <img src={quest.img} alt="quest_image"/>
                 </div>
                 <div className="section-two__quest-item-main">
-                    <h3 className="section-two__quest-item-main__h3">
-                        {quest.name}
-                    </h3>
+                    <div className="section-two__quest-item-title">
+                        <h3 className="section-two__quest-item-title__h3">
+                            {quest.name}
+                        </h3>
+                        <div className="section-two__quest-item-title__rating">
+                            <Rating 
+                                sx={{
+                                    width: '120px',
+                                    "& .MuiRating-iconEmpty": {
+                                        color: "#fff",
+                                    },
+                                }} 
+                                size="medium" 
+                                name="rating-read" 
+                                max={5} 
+                                value={quest.rating || 0}
+                                readOnly
+                            />
+                        </div>
+                    </div>
                     <Link to={''} className="section-two__quest-item-main__link">
                         View
                     </Link>
