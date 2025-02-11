@@ -55,22 +55,6 @@ public class TestConfiguration : IEntityTypeConfiguration<Test>
                 .IsRequired();
         });
         
-        builder.OwnsOne(t => t.CreatedAt, createdAt =>
-        {
-            createdAt
-                .Property(c => c.Value)
-                .HasColumnName("created_at")
-                .IsRequired();
-        });
-        
-        builder.OwnsOne(t => t.UpdatedAt, updatedAt =>
-        {
-            updatedAt
-                .Property(u => u.Value)
-                .HasColumnName("updated_at")
-                .IsRequired();
-        });
-        
         builder.HasMany(t => t.Questions)
             .WithOne()
             .HasForeignKey("TestId")

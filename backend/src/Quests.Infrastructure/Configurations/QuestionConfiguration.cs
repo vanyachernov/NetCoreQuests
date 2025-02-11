@@ -28,40 +28,17 @@ public class QuestionConfiguration : IEntityTypeConfiguration<Question>
                 .IsRequired();
         });
         
-        builder.OwnsOne(q => q.CorrectOption, correctOption =>
-        {
-            correctOption.Property(o => o.Id)
-                .HasColumnName("correct_option_id")
-                .IsRequired();
-
-            correctOption.Property(o => o.Text)
-                .HasColumnName("correct_option_text")
-                .HasMaxLength(Constants.MAX_OPTION_TEXT_LENGTH)
-                .IsRequired();
-
-            correctOption.Property(o => o.IsCorrect)
-                .HasColumnName("is_correct")
-                .IsRequired();
-        });
+        builder.HasMany(q => q.Options)
+            .WithOne(o => o.Question)
+            .HasForeignKey(o => o.QuestionId)
+            .OnDelete(DeleteBehavior.Cascade);
         
-        builder.OwnsMany(q => q.Options, options =>
-        {
-            options.WithOwner().HasForeignKey("QuestionId");
-
-            options.Property(o => o.Id)
-                .HasColumnName("option_id")
-                .IsRequired();
-
-            options.Property(o => o.Text)
-                .HasColumnName("option_text")
-                .HasMaxLength(Constants.MAX_OPTION_TEXT_LENGTH)
-                .IsRequired();
-
-            options.Property(o => o.IsCorrect)
-                .HasColumnName("is_correct")
-                .IsRequired();
-
-            options.ToTable("options");
-        });
+        builder.Property<OptionId?>("CorrectOptionId")
+            .HasColumnName("correct_option_id");
+        
+        builder.HasOne<Option>()
+            .WithMany()
+            .HasForeignKey("CorrectOptionId")
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

@@ -1,16 +1,18 @@
+using CSharpFunctionalExtensions;
+using Quests.Domain.Shared;
+using Quests.Domain.Shared.IDs;
 using Quests.Domain.TestDirectory.Root;
 
 namespace Quests.Application.TestDirectory;
 
 public interface ITestsRepository
 {
-    /// <summary>
-    /// Creates a new test.
-    /// </summary>
-    /// <param name="test"></param>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
-    Task<Guid> Add(
-        Test test,
+    Task<Result<Guid, Error>> Add(
+        Test test, 
+        CancellationToken cancellationToken = default);
+    
+    Task SetCorrectOptionId(
+        QuestionId questionId, 
+        OptionId correctOptionId, 
         CancellationToken cancellationToken = default);
 }

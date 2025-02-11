@@ -5,25 +5,9 @@ namespace Quests.Domain.TestDirectory.ValueObjects;
 
 public record CreatedOrUpdatedAt
 {
+    public DateTime Value { get; }
+
     private CreatedOrUpdatedAt(DateTime value) => Value = value;
 
-    public DateTime Value { get; }
-    
-    public static Result<CreatedOrUpdatedAt, Error> Create(DateTime createdAt)
-    {
-        if (createdAt < new DateTime(2000, 1, 1))
-        {
-            return Errors.General.ValueIsInvalid("Created date cannot be earlier than January 1, 2000.");
-        }
-
-        if (createdAt > DateTime.UtcNow)
-        {
-            return Errors.General.ValueIsInvalid("Created date cannot be in the future.");
-        }
-        
-        return new CreatedOrUpdatedAt(createdAt);
-    }
-    
-    public override string ToString() 
-        => Value.ToString("yyyy-MM-dd HH:mm:ss");
+    public static CreatedOrUpdatedAt Create(DateTime value) => new(value);
 }

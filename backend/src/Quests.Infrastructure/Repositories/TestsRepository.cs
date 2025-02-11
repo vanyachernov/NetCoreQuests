@@ -1,20 +1,41 @@
+using CSharpFunctionalExtensions;
 using Quests.Application.TestDirectory;
+using Quests.Domain.Shared;
+using Quests.Domain.Shared.IDs;
 using Quests.Domain.TestDirectory.Root;
+using Quests.Infrastructure;
 
-namespace Quests.Infrastructure.Repositories;
-
-public class TestsRepository(QuestDbContext context) : ITestsRepository
+public class TestsRepository(QuestDbContext dbContext) : ITestsRepository
 {
-    public async Task<Guid> Add(
+    public async Task<Result<Guid, Error>> Add(
         Test test, 
         CancellationToken cancellationToken = default)
     {
-        await context.AddAsync(
-            test, 
-            cancellationToken);
+        try
+        {
+            dbContext.Tests.Add(test);
+            
+            await dbContext.SaveChangesAsync(cancellationToken);
+            
+            return test.Id.Value;
+        }
+        catch (Exception ex)
+        {
+            return Errors.General.ValueIsInvalid(ex.Message);
+        }
+    }
 
-        await context.SaveChangesAsync(cancellationToken);
-
-        return test.Id.Value;
+    public async Task SetCorrectOptionId(
+        QuestionId questionId, 
+        OptionId correctOptionId, 
+        CancellationToken cancellationToken = default)
+    {
+        var question = await dbContext.Questions.FindAsync(new object[] { questionId }, cancellationToken);
+        if (question != null)
+        {
+            question.CorrectOptionId = correctOptionId;
+            
+            await dbContext.SaveChangesAsync(cancellationToken);
+        }
     }
 }
