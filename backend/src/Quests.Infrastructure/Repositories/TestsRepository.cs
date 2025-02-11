@@ -15,6 +15,6 @@ public class TestsRepository(QuestDbContext context) : ITestsRepository
 
         await context.SaveChangesAsync(cancellationToken);
 
-        return test.Id;
+        return test.Id.Value;
     }
 }

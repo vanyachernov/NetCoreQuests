@@ -17,6 +17,6 @@ public class TestsController : ControllerBase
             request,
             cancellationToken);
         
-        return Ok();
+        return Ok(result);
     }
 }
