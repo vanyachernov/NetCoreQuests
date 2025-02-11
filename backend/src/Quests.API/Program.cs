@@ -1,4 +1,6 @@
 using Quests.API;
+using Quests.Application;
+using Quests.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 {
@@ -6,7 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
 
-    builder.Services.AddApi();
+    builder.Services
+        .AddApi()
+        .AddApplication()
+        .AddInfrastructure();
 }
 
 var app = builder.Build();
