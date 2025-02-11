@@ -2,7 +2,10 @@ import { create } from "zustand";
 import axios from "axios";
 
 export const useUserInformationStore = create((set) => ({
-    userData: {},
+    userData: {
+        
+    },
+    
     fetchUserData: async () => {
         try {
             

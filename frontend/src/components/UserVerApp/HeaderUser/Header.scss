@@ -2,7 +2,7 @@
 .wrapper-header-userver{
     padding: 15px;
     width: 100%;
-    border-bottom: 2px solid var(--text-color);
+    border-bottom: 2px solid #bcbcbc;
 }
 
 .header-userver{
@@ -30,6 +30,7 @@
         & h3{
             font-size: 20px;
             font-weight: 600;
+            color: var(--text-color);
         }
     }
 

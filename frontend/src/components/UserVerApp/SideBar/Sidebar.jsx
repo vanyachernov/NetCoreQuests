@@ -24,7 +24,7 @@ export default function Sidebar ({isActiveSidebar, handleOnClickOpenSidebar}) {
                 <div className='sidebar-menu'>
                     {
                         sidebarMenu.map(({item, path}) => (
-                            <Link to={`/app/${path}`} key={item} className='sidebar-menu__item'>
+                            <Link onClick={handleOnClickOpenSidebar} to={`/app/${path}`} key={item} className='sidebar-menu__item'>
                                 {item}
                             </Link>
                         ))
