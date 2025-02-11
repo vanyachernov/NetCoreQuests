@@ -46,7 +46,17 @@ public class TestsRepository(QuestDbContext dbContext) : ITestsRepository
     {
         return await dbContext.Tests
             .Include(t => t.Questions)
-            .ThenInclude(q => q.Options)
+                .ThenInclude(q => q.Options)
             .ToListAsync(cancellationToken);
+    }
+
+    public async Task<Test?> GetTestByIdWithDetails(
+        Guid testId, 
+        CancellationToken cancellationToken = default)
+    {
+        return await dbContext.Tests
+            .Include(t => t.Questions)
+            .ThenInclude(q => q.Options)
+            .FirstOrDefaultAsync(t => t.Id == testId, cancellationToken);
     }
 }

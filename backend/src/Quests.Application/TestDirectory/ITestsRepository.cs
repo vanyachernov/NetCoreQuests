@@ -18,4 +18,8 @@ public interface ITestsRepository
 
     Task<IEnumerable<Test>> GetAllTestsWithDetails(
         CancellationToken cancellationToken = default);
+    
+    Task<Test?> GetTestByIdWithDetails(
+        Guid testId, 
+        CancellationToken cancellationToken = default);
 }
