@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Quests.Application.TestDirectory.AddTest;
+using Quests.Application.TestDirectory.GetTests;
 using Quests.Infrastructure.Identity;
 
 namespace Quests.API.Controllers;
@@ -10,6 +11,16 @@ namespace Quests.API.Controllers;
 public class TestsController(UserManager<ApplicationUser> userManager) 
     : ControllerBase
 {
+    [HttpGet]
+    public async Task<IActionResult> GetTests(
+        [FromServices] GetTestsHandler testHandler,
+        CancellationToken cancellationToken = default)
+    {
+        var tests = await testHandler.Handle(cancellationToken);
+        
+        return Ok(tests);
+    }
+    
     [HttpPost]
     [Route("{userId:guid}")]
     public async Task<ActionResult> Get(

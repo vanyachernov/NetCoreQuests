@@ -15,4 +15,7 @@ public interface ITestsRepository
         QuestionId questionId, 
         OptionId correctOptionId, 
         CancellationToken cancellationToken = default);
+
+    Task<IEnumerable<Test>> GetAllTestsWithDetails(
+        CancellationToken cancellationToken = default);
 }
