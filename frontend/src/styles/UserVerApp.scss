@@ -1,0 +1,16 @@
+
+.wrapper-userver-page{
+    display: flex;
+    min-height: 100vh;
+}
+
+.userver-page{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.outlet-container{
+    flex: 1;
+    
+}

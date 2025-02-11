@@ -1,6 +1,7 @@
-import { useRef } from "react"
+import {useState, useRef } from "react"
 import Header from "./components/ClientVerApp/HeaderClient/Header"
 import SectionOne from "./components/ClientVerApp/SectionOne/SectionOne"
+import SectionTwo from "./components/ClientVerApp/SectionTwo/SectionTwo"
 import Footer from "./components/ClientVerApp/Footer/Footer"
 import './styles/ClientVerApp.scss'
 
@@ -17,6 +18,9 @@ export default function ClientVerApp () {
                 <div className="container-main">
                     <div className="client-page">
                         <SectionOne/>
+                        <SectionTwo
+                            questsRef={questsRef}
+                        />
                     </div>
                 </div>
             </main>

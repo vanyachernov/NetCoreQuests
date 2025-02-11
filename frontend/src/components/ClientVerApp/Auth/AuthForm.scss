@@ -1,0 +1,123 @@
+
+.wrapper-login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+
+.login-page{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+    max-width: 370px;
+    align-items: center;
+}
+
+.container-login-page{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+    max-width: 310px;
+}
+
+.login-title{
+    & h3 {
+        font-family: var(--font-accent);
+        font-size: 22px;
+        font-weight: 500;
+        font-style: normal;
+        text-align: center;
+    }
+}
+
+.login-form{
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+    align-items: center;
+    padding: 15px;
+    border-radius: 6px;
+    border: 2px solid var(--text-color);
+}
+
+.wrapper-input-sections{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.wrapper-input-section{
+    display: flex;
+    flex-direction: column;
+    align-items: self-start;
+    row-gap: 5px;
+
+    & label {
+        font-weight: 500;
+        cursor: default;
+        font-style: normal;
+    }
+
+    & input {
+        border: 1px solid var(--text-color);
+        max-width: 200px;
+        border-radius: 4px;
+        padding: 3px 5px;
+        font-size: 15px;
+
+    }
+
+    & .login-input-error__p{
+        font-weight: 500;
+        color: rgb(216, 38, 38);
+    }
+
+}
+
+.wrapper-login-button{
+    display: flex;
+    justify-content: center;
+
+    & button {
+        padding: 6px 10px;
+        color: var(--text-color);
+        font-family: var(--font-main);
+        font-style: normal;
+        border-radius: 12px;
+        border: 2px solid var(--text-color);
+        background-color: transparent;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+            color: #000;
+            background-color: var(--text-color);
+            border-color: var(--text-color);
+            transform: scale(1);
+        }
+    }
+}
+
+.wrapper-login-footer-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 7px;
+
+    & .login-footer-section{
+        display: flex;
+        align-items: center;
+        column-gap: 7px;
+
+        & .login-footer-section__link{
+            cursor: pointer;
+            font-weight: 500;
+            color: rgb(39, 39, 215);
+        }
+    }
+}
