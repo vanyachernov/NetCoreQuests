@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Quests.Infrastructure;
@@ -11,9 +12,11 @@ using Quests.Infrastructure;
 namespace Quests.Infrastructure.Migrations
 {
     [DbContext(typeof(QuestDbContext))]
-    partial class QuestDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250211171227_DeleteUpdatedAndCreatedDate")]
+    partial class DeleteUpdatedAndCreatedDate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -184,44 +187,11 @@ namespace Quests.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Option", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uuid")
-                        .HasColumnName("option_id");
-
-                    b.Property<bool>("IsCorrect")
-                        .HasColumnType("boolean")
-                        .HasColumnName("is_correct");
-
-                    b.Property<Guid>("QuestionId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("question_id");
-
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)")
-                        .HasColumnName("text");
-
-                    b.HasKey("Id")
-                        .HasName("pk_options");
-
-                    b.HasIndex("QuestionId")
-                        .HasDatabaseName("ix_options_question_id");
-
-                    b.ToTable("options", (string)null);
-                });
-
             modelBuilder.Entity("Quests.Domain.TestDirectory.Entities.Question", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid")
                         .HasColumnName("question_id");
-
-                    b.Property<Guid?>("CorrectOptionId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("correct_option_id");
 
                     b.Property<Guid?>("TestId")
                         .HasColumnType("uuid")
@@ -229,9 +199,6 @@ namespace Quests.Infrastructure.Migrations
 
                     b.HasKey("Id")
                         .HasName("pk_questions");
-
-                    b.HasIndex("CorrectOptionId")
-                        .HasDatabaseName("ix_questions_correct_option_id");
 
                     b.HasIndex("TestId")
                         .HasDatabaseName("ix_questions_test_id");
@@ -403,31 +370,73 @@ namespace Quests.Infrastructure.Migrations
                         .HasConstraintName("fk_asp_net_user_tokens_asp_net_users_user_id");
                 });
 
-            modelBuilder.Entity("Option", b =>
-                {
-                    b.HasOne("Quests.Domain.TestDirectory.Entities.Question", "Question")
-                        .WithMany("Options")
-                        .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_options_questions_question_id");
-
-                    b.Navigation("Question");
-                });
-
             modelBuilder.Entity("Quests.Domain.TestDirectory.Entities.Question", b =>
                 {
-                    b.HasOne("Option", null)
-                        .WithMany()
-                        .HasForeignKey("CorrectOptionId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .HasConstraintName("fk_questions_options_correct_option_id");
-
                     b.HasOne("Quests.Domain.TestDirectory.Root.Test", null)
                         .WithMany("Questions")
                         .HasForeignKey("TestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .HasConstraintName("fk_questions_tests_test_id");
+
+                    b.OwnsOne("Quests.Domain.TestDirectory.ValueObjects.Option", "CorrectOption", b1 =>
+                        {
+                            b1.Property<Guid>("QuestionId")
+                                .HasColumnType("uuid")
+                                .HasColumnName("question_id");
+
+                            b1.Property<Guid>("Id")
+                                .HasColumnType("uuid")
+                                .HasColumnName("correct_option_id");
+
+                            b1.Property<bool>("IsCorrect")
+                                .HasColumnType("boolean")
+                                .HasColumnName("is_correct");
+
+                            b1.Property<string>("Text")
+                                .IsRequired()
+                                .HasMaxLength(200)
+                                .HasColumnType("character varying(200)")
+                                .HasColumnName("correct_option_text");
+
+                            b1.HasKey("QuestionId");
+
+                            b1.ToTable("questions");
+
+                            b1.WithOwner()
+                                .HasForeignKey("QuestionId")
+                                .HasConstraintName("fk_questions_questions_question_id");
+                        });
+
+                    b.OwnsMany("Quests.Domain.TestDirectory.ValueObjects.Option", "Options", b1 =>
+                        {
+                            b1.Property<Guid>("QuestionId")
+                                .HasColumnType("uuid")
+                                .HasColumnName("question_id");
+
+                            b1.Property<Guid>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("uuid")
+                                .HasColumnName("option_id");
+
+                            b1.Property<bool>("IsCorrect")
+                                .HasColumnType("boolean")
+                                .HasColumnName("is_correct");
+
+                            b1.Property<string>("Text")
+                                .IsRequired()
+                                .HasMaxLength(200)
+                                .HasColumnType("character varying(200)")
+                                .HasColumnName("option_text");
+
+                            b1.HasKey("QuestionId", "Id")
+                                .HasName("pk_options");
+
+                            b1.ToTable("options", (string)null);
+
+                            b1.WithOwner()
+                                .HasForeignKey("QuestionId")
+                                .HasConstraintName("fk_options_questions_question_id");
+                        });
 
                     b.OwnsOne("Quests.Domain.TestDirectory.ValueObjects.Text", "Text", b1 =>
                         {
@@ -449,6 +458,11 @@ namespace Quests.Infrastructure.Migrations
                                 .HasForeignKey("QuestionId")
                                 .HasConstraintName("fk_questions_questions_question_id");
                         });
+
+                    b.Navigation("CorrectOption")
+                        .IsRequired();
+
+                    b.Navigation("Options");
 
                     b.Navigation("Text")
                         .IsRequired();
@@ -545,11 +559,6 @@ namespace Quests.Infrastructure.Migrations
 
                     b.Navigation("Title")
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Quests.Domain.TestDirectory.Entities.Question", b =>
-                {
-                    b.Navigation("Options");
                 });
 
             modelBuilder.Entity("Quests.Domain.TestDirectory.Root.Test", b =>

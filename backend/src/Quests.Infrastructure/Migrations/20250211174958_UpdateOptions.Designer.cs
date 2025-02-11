@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Quests.Infrastructure;
@@ -11,9 +12,11 @@ using Quests.Infrastructure;
 namespace Quests.Infrastructure.Migrations
 {
     [DbContext(typeof(QuestDbContext))]
-    partial class QuestDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250211174958_UpdateOptions")]
+    partial class UpdateOptions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -187,8 +190,9 @@ namespace Quests.Infrastructure.Migrations
             modelBuilder.Entity("Option", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
-                        .HasColumnName("option_id");
+                        .HasColumnName("id");
 
                     b.Property<bool>("IsCorrect")
                         .HasColumnType("boolean")
@@ -200,17 +204,16 @@ namespace Quests.Infrastructure.Migrations
 
                     b.Property<string>("Text")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)")
+                        .HasColumnType("text")
                         .HasColumnName("text");
 
                     b.HasKey("Id")
-                        .HasName("pk_options");
+                        .HasName("pk_option");
 
                     b.HasIndex("QuestionId")
-                        .HasDatabaseName("ix_options_question_id");
+                        .HasDatabaseName("ix_option_question_id");
 
-                    b.ToTable("options", (string)null);
+                    b.ToTable("option", (string)null);
                 });
 
             modelBuilder.Entity("Quests.Domain.TestDirectory.Entities.Question", b =>
@@ -223,6 +226,10 @@ namespace Quests.Infrastructure.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("correct_option_id");
 
+                    b.Property<Guid?>("CorrectOptionId1")
+                        .HasColumnType("uuid")
+                        .HasColumnName("correct_option_id1");
+
                     b.Property<Guid?>("TestId")
                         .HasColumnType("uuid")
                         .HasColumnName("test_id");
@@ -232,6 +239,9 @@ namespace Quests.Infrastructure.Migrations
 
                     b.HasIndex("CorrectOptionId")
                         .HasDatabaseName("ix_questions_correct_option_id");
+
+                    b.HasIndex("CorrectOptionId1")
+                        .HasDatabaseName("ix_questions_correct_option_id1");
 
                     b.HasIndex("TestId")
                         .HasDatabaseName("ix_questions_test_id");
@@ -410,7 +420,7 @@ namespace Quests.Infrastructure.Migrations
                         .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_options_questions_question_id");
+                        .HasConstraintName("fk_option_questions_question_id");
 
                     b.Navigation("Question");
                 });
@@ -420,8 +430,13 @@ namespace Quests.Infrastructure.Migrations
                     b.HasOne("Option", null)
                         .WithMany()
                         .HasForeignKey("CorrectOptionId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .HasConstraintName("fk_questions_options_correct_option_id");
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasConstraintName("fk_questions_option_correct_option_id");
+
+                    b.HasOne("Option", "CorrectOption")
+                        .WithMany()
+                        .HasForeignKey("CorrectOptionId1")
+                        .HasConstraintName("fk_questions_option_correct_option_id1");
 
                     b.HasOne("Quests.Domain.TestDirectory.Root.Test", null)
                         .WithMany("Questions")
@@ -449,6 +464,8 @@ namespace Quests.Infrastructure.Migrations
                                 .HasForeignKey("QuestionId")
                                 .HasConstraintName("fk_questions_questions_question_id");
                         });
+
+                    b.Navigation("CorrectOption");
 
                     b.Navigation("Text")
                         .IsRequired();

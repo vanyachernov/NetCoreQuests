@@ -14,6 +14,7 @@ public class QuestDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Gu
     
     public DbSet<Test> Tests { get; set; } = null!;
     public DbSet<Question> Questions { get; set; } = null!;
+    public DbSet<Option> Options { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

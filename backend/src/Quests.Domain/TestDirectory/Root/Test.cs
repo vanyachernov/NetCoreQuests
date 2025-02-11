@@ -11,7 +11,7 @@ public class Test : Shared.Entity<TestId>
     public Test(TestId id)
         : base(id) { }
     
-    private readonly List<Question> _questions;
+    private readonly List<Question> _questions = [];
 
     public Test(
         TestId id,
@@ -19,17 +19,13 @@ public class Test : Shared.Entity<TestId>
         Description description,
         UserId userId,
         Difficulty difficulty,
-        Rating rating,
-        CreatedOrUpdatedAt createdAt,
-        CreatedOrUpdatedAt updatedAt) : base(id)
+        Rating rating) : base(id)
     {
         Title = title;
         Description = description;
         UserId = userId;
         Difficulty = difficulty;
         Rating = rating;
-        CreatedAt = createdAt;
-        UpdatedAt = updatedAt;
     }
 
     public Title Title { get; private set; } = default!;
@@ -37,8 +33,6 @@ public class Test : Shared.Entity<TestId>
     public UserId UserId { get; private set; } = default!;
     public Difficulty Difficulty { get; private set; } = default!;
     public Rating Rating { get; private set; } = default!;
-    public CreatedOrUpdatedAt CreatedAt { get; private set; } = default!;
-    public CreatedOrUpdatedAt UpdatedAt { get; private set; } = default!;
     
     public IReadOnlyCollection<Question> Questions => _questions;
     
@@ -51,9 +45,7 @@ public class Test : Shared.Entity<TestId>
         Description description,
         UserId userId,
         Difficulty difficulty,
-        Rating rating,
-        CreatedOrUpdatedAt createdAt,
-        CreatedOrUpdatedAt updatedAt)
+        Rating rating)
     {
         return new Test(
             id,
@@ -61,8 +53,6 @@ public class Test : Shared.Entity<TestId>
             description,
             userId,
             difficulty,
-            rating,
-            createdAt,
-            updatedAt);
+            rating);
     }
 }
