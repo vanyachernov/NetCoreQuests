@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Quests.Application.TestDirectory;
 using Quests.Infrastructure.Identity;
+using Quests.Infrastructure.Repositories;
 
 namespace Quests.Infrastructure;
 

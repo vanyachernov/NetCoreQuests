@@ -1,9 +1,11 @@
 using CSharpFunctionalExtensions;
+using Microsoft.EntityFrameworkCore;
 using Quests.Application.TestDirectory;
 using Quests.Domain.Shared;
 using Quests.Domain.Shared.IDs;
 using Quests.Domain.TestDirectory.Root;
-using Quests.Infrastructure;
+
+namespace Quests.Infrastructure.Repositories;
 
 public class TestsRepository(QuestDbContext dbContext) : ITestsRepository
 {
@@ -37,5 +39,24 @@ public class TestsRepository(QuestDbContext dbContext) : ITestsRepository
             
             await dbContext.SaveChangesAsync(cancellationToken);
         }
+    }
+    
+    public async Task<IEnumerable<Test>> GetAllTestsWithDetails(
+        CancellationToken cancellationToken = default)
+    {
+        return await dbContext.Tests
+            .Include(t => t.Questions)
+                .ThenInclude(q => q.Options)
+            .ToListAsync(cancellationToken);
+    }
+
+    public async Task<Test?> GetTestByIdWithDetails(
+        Guid testId, 
+        CancellationToken cancellationToken = default)
+    {
+        return await dbContext.Tests
+            .Include(t => t.Questions)
+            .ThenInclude(q => q.Options)
+            .FirstOrDefaultAsync(t => t.Id == testId, cancellationToken);
     }
 }
