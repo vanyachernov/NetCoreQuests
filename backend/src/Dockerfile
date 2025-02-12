@@ -4,4 +4,4 @@ WORKDIR /source
 
 COPY . .
 
-CMD ["sh", "-c", "cd Quests.API && dotnet run"]
+CMD ["sh", "-c", "cd ./src/Quests.API && dotnet run"]

@@ -12,10 +12,10 @@ public static class Inject
         services.AddDbContext<QuestDbContext>(options =>
         {
             var dbServer = Environment.GetEnvironmentVariable("DB_SERVER") ?? "localhost";
-            var dbPort = Environment.GetEnvironmentVariable("DB_PORT") ?? "5433";
-            var dbName = Environment.GetEnvironmentVariable("DB_NAME") ?? "QuestsDb";
-            var dbUser = Environment.GetEnvironmentVariable("DB_USER") ?? "user";
-            var dbPassword = Environment.GetEnvironmentVariable("DB_PASSWORD") ?? "password";
+            var dbPort = Environment.GetEnvironmentVariable("DB_PORT") ?? "26957";
+            var dbName = Environment.GetEnvironmentVariable("DB_NAME") ?? "defaultdb";
+            var dbUser = Environment.GetEnvironmentVariable("DB_USER") ?? "avnadmin";
+            var dbPassword = Environment.GetEnvironmentVariable("DB_PASSWORD") ?? "here";
 
             var connectionString =
                 $"Host={dbServer};"
