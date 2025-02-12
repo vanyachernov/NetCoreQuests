@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Quests.Application.TestDirectory;
+using Quests.Application.UserDirectory;
 using Quests.Infrastructure.Identity;
 using Quests.Infrastructure.Repositories;
 
@@ -19,7 +20,12 @@ public static class Inject
             })
             .AddEntityFrameworkStores<QuestDbContext>();
         
+        services.AddScoped<IUsersRepository, UsersRepository>();
+        
         services.AddScoped<ITestsRepository, TestsRepository>();
+        
+        services.AddScoped<JwtHandler>();
+        
         
         return services;
     }
