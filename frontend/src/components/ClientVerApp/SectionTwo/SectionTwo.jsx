@@ -5,40 +5,45 @@ import {BeatLoader} from 'react-spinners'
 import Rating from '@mui/material/Rating';
 import './SectionTwo.scss'
 
-const quests = [
-    {
-        id: 1,
-        name: 'Lorem ipsum dolor sit amet',
-        title: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo rerum incidunt, earum hic in neque dolorum, similique placeat sequi corporis consequuntur.',
-        img: 'https://fakeimg.pl/800/',
-        rating: 3,
-    },
-    {
-        id: 2,
-        name: 'Lorem ipsum dolor sit amet',
-        title: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo rerum incidunt, earum hic in neque dolorum, similique placeat sequi corporis consequuntur.',
-        img: 'https://fakeimg.pl/600/',
-        rating: 2,
-    },
-    {
-        id: 3,
-        name: 'Lorem ipsum dolor sit amet',
-        title: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo rerum incidunt, earum hic in neque dolorum, similique placeat sequi corporis consequuntur.',
-        img: 'https://fakeimg.pl/600/',
-        rating: 4,
-    },
-    {
-        id: 4,
-        name: 'Lorem ipsum dolor sit amet',
-        title: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo rerum incidunt, earum hic in neque dolorum, similique placeat sequi corporis consequuntur.',
-        img: 'https://fakeimg.pl/600/',
-        rating: 3,
-    },
-]
+// const quests = [
+//     {
+//         id: 1,
+//         name: 'Lorem ipsum dolor sit amet',
+//         title: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo rerum incidunt, earum hic in neque dolorum, similique placeat sequi corporis consequuntur.',
+//         img: 'https://fakeimg.pl/800/',
+//         rating: 3,
+//     },
+//     {
+//         id: 2,
+//         name: 'Lorem ipsum dolor sit amet',
+//         title: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo rerum incidunt, earum hic in neque dolorum, similique placeat sequi corporis consequuntur.',
+//         img: 'https://fakeimg.pl/600/',
+//         rating: 2,
+//     },
+//     {
+//         id: 3,
+//         name: 'Lorem ipsum dolor sit amet',
+//         title: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo rerum incidunt, earum hic in neque dolorum, similique placeat sequi corporis consequuntur.',
+//         img: 'https://fakeimg.pl/600/',
+//         rating: 4,
+//     },
+//     {
+//         id: 4,
+//         name: 'Lorem ipsum dolor sit amet',
+//         title: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo rerum incidunt, earum hic in neque dolorum, similique placeat sequi corporis consequuntur.',
+//         img: 'https://fakeimg.pl/600/',
+//         rating: 3,
+//     },
+// ]
 
 export default function SectionTwo ({questsRef}) {
 
-    const {isLoading} = useQuestsStore()
+    // const {isLoading} = useQuestsStore()
+    const {quests, fetchQuests, isLoading} = useQuestsStore()
+
+    useEffect(() => {
+        fetchQuests()
+    },[])
 
     return (
         <>
@@ -77,12 +82,12 @@ function QuestItem ({quest}) {
         <>
             <div className="section-two__quest-item">
                 <div className="section-two__quest-item__img">
-                    <img src={quest.img} alt="quest_image"/>
+                    <img src="https://fakeimg.pl/600/" alt="quest_image"/>
                 </div>
                 <div className="section-two__quest-item-main">
                     <div className="section-two__quest-item-title">
                         <h3 className="section-two__quest-item-title__h3">
-                            {quest.name}
+                            {quest.title}
                         </h3>
                         <div className="section-two__quest-item-title__rating">
                             <Rating 
@@ -100,7 +105,7 @@ function QuestItem ({quest}) {
                             />
                         </div>
                     </div>
-                    <Link to={''} className="section-two__quest-item-main__link">
+                    <Link to={`/quest/${quest.id}`} className="section-two__quest-item-main__link">
                         View
                     </Link>
                 </div>

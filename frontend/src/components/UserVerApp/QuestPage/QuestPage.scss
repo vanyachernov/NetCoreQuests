@@ -1,0 +1,115 @@
+.wrapper-quest-page{
+    min-height: 100vh;
+    display: flex;
+    width: 100%;
+}
+
+.quest-page{
+    padding: 50px 10px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    column-gap: 100px;
+}
+
+.quest-page-img{
+    max-width: 450px;
+    max-height: 450px;
+    height: auto;
+}
+
+.quest-page-main{
+    padding: 10px 0px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 35px;
+    width: 100%;
+    max-width: 550px;
+}
+
+.quest-page-main-title{
+    display: flex;
+    align-items: center;
+    column-gap: 15px;
+
+    & img {
+        cursor: pointer;
+        padding: 4px;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        transition: all 0.3s ease-in-out;
+
+        &:hover{
+            box-shadow: 0px 0px 3px #c1c0c0;
+        }
+    }
+
+    & h3{
+        font-size: 31px;
+        font-family: var(--font-accent);
+        font-style: normal;
+    }
+}
+
+.quest-page-main-description{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 5px;
+
+    & h3{
+        font-size: 18px;
+        font-weight: 500;
+    }
+}
+
+.quest-page-main__buttons{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 10px;
+
+    & .quest-page-main__buttons__link{
+        padding: 8px 13px;
+        color: var(--text-color);
+        font-family: var(--font-main);
+        font-size: 17px;
+        font-style: normal;
+        border-radius: 12px;
+        border: 2px solid var(--text-color);
+        background-color: transparent;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+
+        &:hover{
+            color: #000;
+            background-color: var(--text-color);
+            border-color: var(--text-color);
+            transform: scale(1);
+        }
+    }
+}
+
+.quest-page-main__buttons__p{
+    font-size: 17px;
+    font-style: normal;
+
+    & .quest-page-main__buttons__span-easy{
+        font-size: 19px;
+        font-weight: 600;
+        color: rgb(21, 173, 21);
+    }
+
+    & .quest-page-main__buttons__span-medium{
+        font-size: 19px;
+        font-weight: 600;
+        color: rgb(231, 231, 25);
+    }
+
+    & .quest-page-main__buttons__span-hard{
+        font-size: 19px;
+        font-weight: 600;
+        color: rgb(255, 4, 4);
+    }
+}

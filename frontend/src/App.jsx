@@ -6,6 +6,7 @@ import ProtectedRouteApp from "./components/UserVerApp/ProtectedRoute/ProtectedR
 import UserPanel from "./components/UserVerApp/UserPanel/UserPanel"
 import Quests from "./components/UserVerApp/Quests/Quests"
 import CreateQuest from "./components/UserVerApp/CreateQuest/CreateQuest"
+import QuestPage from "./components/UserVerApp/QuestPage/QuestPage"
 import GamePage from "./components/UserVerApp/GamePage/GamePage"
 import UserVerApp from "./UserVerApp"
 
@@ -16,11 +17,14 @@ export default function App () {
                 <Routes>
                     <Route path="/" element={<ClientVerApp/>}/>
                     <Route path="/auth" element={<AuthForm/>}/>
+                    <Route path="/quest/:questId" element={<QuestPage/>}/>
+                    <Route path="/play/:id" element={<GamePage/>}/>
                     <Route path="/app" element={<ProtectedRouteApp/>}>
                         <Route path="user/:username" element={<UserPanel/>}/>
+                        <Route path="quest/:id" element={<QuestPage/>}/>
+                        <Route path="play/:id" element={<GamePage/>}/>
                         <Route index path="quests" element={<Quests/>}/>
                         <Route path="create" element={<CreateQuest/>}/>
-                        {/* <Route path="quest" element={<GamePage/>} /> */}
                     </Route>
                 </Routes>
             </div>
