@@ -1,33 +1,54 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { urls } from "../../../constants/urls";
 import { useForm } from "react-hook-form";
+import { useUserInformationStore } from "../../../store/userStore/userInformationStore/userInformationStore.js";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 import './AuthForm.scss'
 
 export default function AuthForm () {
 
+    const {loadUserData} = useUserInformationStore()
     const [isLogin, setIsLogin] = useState(true)
+    const navigate = useNavigate()
     const {register, handleSubmit, formState: {errors, isValid}} = useForm({
         mode: "onChange"
     })
 
     const inputErrors = {
         email: {
-          message: errors.email?.message || null
+            message: errors.email?.message || null
         },
         password: {
-          message: errors.password?.message || null
+            message: errors.password?.message || null
         },
-        name: {
-          message: errors.name?.message || null
+        firstName: {
+            message: errors.firstName?.message || null
+        },
+        lastName: {
+            message: errors.lastName?.message || null
         },
     }
 
     const onSubmit = async (data) => {
         try {
-            
+            const response = await axios.post(
+                `${isLogin ? urls.ACCOUNT.AUTHENTICATE : urls.ACCOUNT.REGISTER}`,
+                data,
+                {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }
+            )
+            const decodeToken = jwtDecode(response.data)
+            loadUserData({decodeToken})
+            navigate('/app', {
+                replace: true
+            })
         } catch (error) {
-            
+            console.error("Error: authForm api", error)
         }
     }
 
@@ -48,17 +69,30 @@ export default function AuthForm () {
                         <form onSubmit={handleSubmit(onSubmit)} className="login-form">
                             <div className='wrapper-input-sections'>
                                 {!isLogin && (
-                                    <FormField
-                                        label={"Name"}
-                                        name={"name"}
-                                        type={"text"}
-                                        register={register}
-                                        inputErrors={inputErrors}
-                                        validationRules={{
-                                            required: 'This field must not be empty'
-                                        }}
+                                    <>
+                                        <FormField
+                                            label={"First Name"}
+                                            name={"firstName"}
+                                            type={"text"}
+                                            register={register}
+                                            inputErrors={inputErrors}
+                                            validationRules={{
+                                                required: 'This field must not be empty'
+                                            }}
 
-                                    />
+                                        />
+                                        <FormField
+                                            label={"Last Name"}
+                                            name={"lastName"}
+                                            type={"text"}
+                                            register={register}
+                                            inputErrors={inputErrors}
+                                            validationRules={{
+                                                required: 'This field must not be empty'
+                                            }}
+
+                                        />
+                                    </>
                                 )}
                                 <FormField
                                     label={"Email address"}
@@ -81,7 +115,11 @@ export default function AuthForm () {
                                     register={register}
                                     inputErrors={inputErrors}
                                     validationRules={{
-                                        required: 'This field must not be empty'
+                                        required: 'This field must not be empty',
+                                        minLength: {
+                                            value: 7,
+                                            message: 'Min 7 characters'
+                                        }
                                     }}
                                 />
                             </div>

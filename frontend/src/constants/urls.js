@@ -4,5 +4,9 @@ export const urls = {
     QUESTS: {
         GET: `${BASE_URL}/Tests`,
         GET_BY_ID: `${BASE_URL}/Tests/:questId`,
+    },
+    ACCOUNT: {
+        REGISTER: `${BASE_URL}/Accounts/register`,
+        AUTHENTICATE: `${BASE_URL}/Accounts/authenticate`,
     }
 }
