@@ -49,12 +49,13 @@
    git clone https://github.com/your-repo/quests-management.git
    cd quests-management
    ```
-2. Create a .env file based on .env.example:
+2. Create a .env file based on .env.example (backend):
    ```bash
    cp .env.example .env
    ```
-3. Edit the .env file to specify the necessary environment variables.
-4. Run the application using Docker Compose:
+3. Also create a .env file based on .env.example (frontend).
+4. Edit the .env file to specify the necessary environment variables.
+5. Run the application using Docker Compose:
    ```bash
    docker-compose up --build
    ```
@@ -69,6 +70,7 @@
 > - **docker-compose.yml** : File for running containers.
 > - **/backend** : Backend part of the application (ASP.NET Core Web API).
 > - **/backend/src/Quests.API/.env.example** : Example environment variables file.
+> > - **/frontend/.env.example** : Example environment variables file.
 > - **/frontend** : Frontend part of the application (React + Vite).
 
 ---
