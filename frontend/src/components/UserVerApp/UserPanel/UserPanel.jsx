@@ -1,8 +1,8 @@
-import { useState } from 'react'
-import { useUserInformationStore } from '../../../store/userStore/userInformationStore/userInformationStore'
+import { useEffect, useState } from 'react'
+import { useUserInformationStore } from '../../../store/userStore/userInformationStore/userInformationStore.js'
 import {StyledMain as SM} from './StyledUserPanel'
 import './UserPanel.scss'
-import { textFieldClasses } from '@mui/material'
+
 
 const tabsItem = ["Your Information", "Quests History", "Achievements"]
 
@@ -83,16 +83,24 @@ function TabsContentOne () {
                     </div>
                     <div className='tab-one-userInfo-page'>
                         <UserFieldInfo
-                            label={"Name"}
-                            value={userData.name}
+                            label={"First Name"}
+                            value={userData.decodeToken.userFirstName}
                             name={"name"}
                             editButton={editButton}
                             type={"text"}
                             onChange={handleOnChangeFields}
                         />
                         <UserFieldInfo
+                            label={"Last Name"}
+                            value={userData.decodeToken.userLastname}
+                            name={"lastName"}
+                            editButton={editButton}
+                            type={"email"}
+                            onChange={handleOnChangeFields}
+                        />
+                        <UserFieldInfo
                             label={"Email"}
-                            value={userData.email}
+                            value={userData.decodeToken.userEmail}
                             name={"email"}
                             editButton={editButton}
                             type={"email"}

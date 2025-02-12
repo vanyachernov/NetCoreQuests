@@ -1,6 +1,6 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Link } from "react-router-dom";
-import { useQuestsStore } from "../../../store/userStore/questsStore/questsStore"
+import { useQuestsStore } from "../../../store/userStore/questsStore/questsStore.js"
 import Rating from '@mui/material/Rating';
 import arrowPrev from '../../../assets/img/icons/arrow-prev.png'
 import arrowNext from '../../../assets/img/icons/arrow-next.png'
@@ -8,9 +8,13 @@ import './Quests.scss'
 
 export default function Quests () {
 
-    const {quests} = useQuestsStore()
+    const {quests, fetchQuests} = useQuestsStore()
     const [currentPage, setCurrentPage] = useState(1)
     const questsPerPage = 5
+
+    useEffect(() => {
+        fetchQuests()
+    },[])
 
     const indexOfLastProduct = currentPage * questsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - questsPerPage;
@@ -61,7 +65,7 @@ function QuestItem ({quest}) {
         <>
             <div className="section-two__quest-item">
                 <div className="section-two__quest-item__img">
-                    <img src={quest.img} alt="quest_image"/>
+                    <img src="https://fakeimg.pl/600/" alt="quest_image"/>
                 </div>
                 <div className="section-two__quest-item-main">
                     <div className="section-two__quest-item-title">
@@ -84,7 +88,7 @@ function QuestItem ({quest}) {
                             />
                         </div>
                     </div>
-                    <Link to={''} className="section-two__quest-item-main__link">
+                    <Link to={`/app/quest/${quest.id}`} className="section-two__quest-item-main__link">
                         View
                     </Link>
                 </div>

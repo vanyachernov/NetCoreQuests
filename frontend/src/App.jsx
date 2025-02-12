@@ -19,10 +19,10 @@ export default function App () {
                     <Route path="/auth" element={<AuthForm/>}/>
                     <Route path="/quest/:questId" element={<QuestPage/>}/>
                     <Route path="/play/:id" element={<GamePage/>}/>
-                    <Route path="/app" element={<ProtectedRouteApp/>}>
+                    <Route path="/app" element={<UserVerApp/>}>
                         <Route index element={<Navigate to="quests" replace/>}/>
                         <Route path="user/:username" element={<UserPanel/>}/>
-                        <Route path="quest/:id" element={<QuestPage/>}/>
+                        <Route path="quest/:questId" element={<QuestPage/>}/>
                         <Route path="play/:id" element={<GamePage/>}/>
                         <Route path="quests" element={<Quests/>}/>
                         <Route path="create" element={<CreateQuest/>}/>

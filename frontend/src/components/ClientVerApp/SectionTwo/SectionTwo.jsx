@@ -5,37 +5,6 @@ import {BeatLoader} from 'react-spinners'
 import Rating from '@mui/material/Rating';
 import './SectionTwo.scss'
 
-// const quests = [
-//     {
-//         id: 1,
-//         name: 'Lorem ipsum dolor sit amet',
-//         title: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo rerum incidunt, earum hic in neque dolorum, similique placeat sequi corporis consequuntur.',
-//         img: 'https://fakeimg.pl/800/',
-//         rating: 3,
-//     },
-//     {
-//         id: 2,
-//         name: 'Lorem ipsum dolor sit amet',
-//         title: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo rerum incidunt, earum hic in neque dolorum, similique placeat sequi corporis consequuntur.',
-//         img: 'https://fakeimg.pl/600/',
-//         rating: 2,
-//     },
-//     {
-//         id: 3,
-//         name: 'Lorem ipsum dolor sit amet',
-//         title: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo rerum incidunt, earum hic in neque dolorum, similique placeat sequi corporis consequuntur.',
-//         img: 'https://fakeimg.pl/600/',
-//         rating: 4,
-//     },
-//     {
-//         id: 4,
-//         name: 'Lorem ipsum dolor sit amet',
-//         title: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo rerum incidunt, earum hic in neque dolorum, similique placeat sequi corporis consequuntur.',
-//         img: 'https://fakeimg.pl/600/',
-//         rating: 3,
-//     },
-// ]
-
 export default function SectionTwo ({questsRef}) {
 
     // const {isLoading} = useQuestsStore()
