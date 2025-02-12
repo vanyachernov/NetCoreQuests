@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  backend:
+    container_name: backend
+    image: backend-image
+    build:
+      context: ./backend
+      dockerfile: ./src/Dockerfile
+    ports:
+      - "8001:5158"
+
+  frontend:
+    container_name: frontend
+    image: frontend-image
+    build:
+      context: ./frontend
+    ports:
+      - "3001:5173"
+    environment:
+      - NODE_ENV=development
+      - VITE_API_URL=http://backend:5158
+
+volumes:
+  postgres-data:

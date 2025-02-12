@@ -1,0 +1,117 @@
+
+.wrapper-create-page{
+    width: 100%;
+    min-height: 100vh;
+}
+
+.create-page{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+    min-height: 100vh;
+    border: 1px solid red;
+}
+
+.create-page-title{
+    display: flex;
+    justify-content: flex-start;
+
+    & h3{
+        font-size: 28px;
+        font-family: var(--font-accent);
+    }
+}
+
+.create-page-base{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    width: 100%;
+
+    & .create-field-base{
+        display: flex;
+        align-items: center;
+        column-gap: 10px;
+        
+        & p{
+            font-size: 17px;
+            font-weight: 500;
+            cursor: default;
+        }
+
+        & label{
+            font-size: 17px;
+            font-weight: 500;
+            cursor: default;
+        }
+
+        & input{
+            border: 1px solid #fff;
+            background-color: transparent;
+            padding: 2px 3px;
+            border-radius: 6px;
+            max-width: 200px;
+        }
+
+        & .create-field-base__error{
+            font-weight: 500;
+            color: rgb(240, 30, 30);
+        }
+    }
+}
+
+.create-page-main{
+    display: flex;
+    flex-direction: column;
+    row-gap: 25px;
+    min-height: 100vh;
+    
+    & .create-page-main__title__h3{
+        font-size: 23px;
+        font-family: var(--font-accent);
+    }
+}
+
+.create-page-main-questions-wrapper{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid red;
+}
+
+.create-field-base__select{
+    &__control{
+        background-color: transparent !important;
+        color: #fff !important;
+
+        &--is-focused {
+            border-color: #fff !important;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5) !important;
+        }
+    }
+
+    &__placeholder {
+        color: #fff !important;
+    }
+
+    &__single-value {
+        color: #fff !important;
+    }
+
+    &__indicator{
+        color: #fff !important;
+    }
+
+    &__menu{
+        background-color: var(--page-bg) !important;
+    }
+
+    &__option{
+        &--is-focused{
+            background-color: transparent !important;
+        }
+    }
+
+    
+}
