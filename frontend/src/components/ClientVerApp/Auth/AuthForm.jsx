@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { urls } from "../../../constants/urls";
+import { urls } from "../../../constants/urls.js";
 import { useForm } from "react-hook-form";
 import { useUserInformationStore } from "../../../store/userStore/userInformationStore/userInformationStore.js";
 import axios from "axios";
