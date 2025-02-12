@@ -1,6 +1,9 @@
+using CSharpFunctionalExtensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Quests.Application.UserDirectory.AddUser;
+using Quests.Application.UserDirectory.AuthenticateUser;
+using Quests.Domain.Shared;
 using Quests.Infrastructure.Extensions;
 using Quests.Infrastructure.Identity;
 
@@ -41,5 +44,35 @@ public class AccountsController(UserManager<ApplicationUser> userManager)
         }
 
         return StatusCode(201);
+    }
+    
+    [HttpPost("authenticate")]
+    public async Task<ActionResult<Result<Error>>> Authenticate(
+        [FromBody] AuthenticateUserRequest request,
+        [FromServices] JwtHandler jwtHandler,
+        CancellationToken cancellationToken = default)
+    {
+        var user = await userManager.FindByEmailAsync(request.Email!);
+
+        if (user is null || !await userManager.CheckPasswordAsync(
+                user, 
+                request.Password!))
+        {
+            return Unauthorized(new AuthenticateUserResponse
+            {
+                ErrorMessage = "Invalid Authentication"
+            });
+        }
+
+        var tokenResult = await jwtHandler.CreateToken(
+            user, 
+            populateExp: true);
+
+        if (tokenResult.IsFailure)
+        {
+            Errors.General.ValueIsInvalid("Token");
+        }
+
+        return Ok(tokenResult.Value);
     }
 }

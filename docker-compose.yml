@@ -5,12 +5,8 @@ services:
     container_name: backend
     image: backend-image
     build:
-      context: ./backend/src
-    env_file:
-      - ./backend/src/Quests.API/.env
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://0.0.0.0:5158
+      context: ./backend
+      dockerfile: ./src/Dockerfile
     ports:
       - "8001:5158"
 
@@ -24,5 +20,6 @@ services:
     environment:
       - NODE_ENV=development
       - VITE_API_URL=http://backend:5158
+
 volumes:
   postgres-data:
